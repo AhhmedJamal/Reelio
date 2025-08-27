@@ -1,49 +1,27 @@
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
-import "./App.css";
+import { useFetchTMDB } from "./hooks/useFetchTMDB";
 
-function App() {
-  
-  const options = {
-    method: "GET",
-    headers: {
-      accept: "application/json",
-      Authorization:
-        "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJiOWZjYjU3YWQ0YjMyNTYxMzE5MmYzMWM4Y2Q3N2Q4YyIsIm5iZiI6MTcwODkwNzI1NC4xMDksInN1YiI6IjY1ZGJkYWY2ZjZmZDE4MDE3YzU3OGRiNyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.l7MRyR7cghu3r4wVFBUx4SRykUhmQYfQYpQeYz6dNLU",
-    },
-  };
+export default function App() {
+  const {
+    data: movies,
+    loading,
+    error,
+  } = useFetchTMDB(import.meta.env.VITE_URL_MOVIE);
 
-  fetch(import.meta.env.VITE_URL_POPULAR, options)
-    .then((res) => res.json())
-    .then((json) => console.log(json))
-    .catch((err) => console.error(err));
-  const [count, setCount] = useState(0);
+  if (loading) return <p>Loading…</p>;
+  if (error) return <p>Error: {error}</p>;
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <ul>
+      {movies.map((m) => (
+        <li key={m.id}>
+          {m.title} {console.log(m)}
+          <img src={`https://image.tmdb.org/t/p/w500${m.poster_path}`} alt="" />
+          <img
+            src={`https://image.tmdb.org/t/p/w500${m.backdrop_path}`}
+            alt=""
+          />
+        </li>
+      ))}
+    </ul>
   );
 }
-
-export default App;
