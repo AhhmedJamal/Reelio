@@ -11,7 +11,7 @@ export default function App() {
   if (error) return <p>Error: {error}</p>;
 
   return (
-    <ul>
+    <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2">
       {movies.map((m) => (
         <li key={m.id}>
           {m.title} {console.log(m)}
