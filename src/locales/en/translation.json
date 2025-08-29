@@ -1,0 +1,28 @@
+{
+  "header": {
+    "title": "Welcome to Our Application",
+    "subtitle": "Your gateway to seamless experience",
+    "logo": "Fliio",
+    "category": "Category",
+    "offers": "Offers",
+    "about": "About",
+    "search": "Search",
+    "account": "Account",
+    "cart": "Cart",
+    "bestSellers": "Best sellers"
+
+  },
+  "footer": {
+    "contact": "Contact Us",
+    "privacy": "Privacy Policy"
+  },
+  "buttons": {
+    "submit": "Submit",
+    "cancel": "Cancel"
+  },
+  "newsletter": {
+    "subscribe": "Sign up and get 20% off your first order",
+    "subscribeDes": "Subscribe to our newsletter and be the first to hear about our new arrivals, special promotions and online exclusives",
+    "emailPlaceholder": "Enter your email"
+  }
+}
