@@ -8,11 +8,13 @@ import { RiShoppingCartLine } from "react-icons/ri";
 import { motion, useMotionValue, useAnimationFrame } from "framer-motion";
 import { toast, Bounce } from "react-toastify";
 import { HiMenuAlt4 } from "react-icons/hi";
+import { IoMdClose } from "react-icons/io";
 
 const Header = () => {
   const { t, i18n } = useTranslation();
   const [lang, setLang] = useState(i18n.language || "en");
   const [darkMode, setDarkMode] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const basePosition = { x: 0, y: 0 };
   const codeDis = "Fliio40";
 
@@ -84,6 +86,7 @@ const Header = () => {
       document.body.classList.remove("dark");
     }
   }
+
   const notify = () =>
     toast.success(`Code copied: ${codeDis}`, {
       position: "top-left",
@@ -143,7 +146,7 @@ const Header = () => {
               key={index}
               animate={basePosition}
               whileHover={generateHoverBounce()}
-              className="flex items-center"
+              className="flex items-center "
             >
               {icon}
             </motion.div>
@@ -161,7 +164,22 @@ const Header = () => {
 
         {/* Navigation links */}
         <div className="links">
-          <HiMenuAlt4 size={30} className="mx-2" />
+          <HiMenuAlt4
+            size={30}
+            className="mx-2 md:hidden z-30 relative"
+            onClick={() => setIsMenuOpen(true)}
+          />
+          <div
+            className={`menu-mobile absolute z-0 top-0 transition-all duration-300 ease-in-out ${
+              isMenuOpen ? "right-0" : "-right-full"
+            } h-full w-full bg-[var(--dark)] bg-opacity-95 z-50 md:hidden`}
+          >
+            <IoMdClose
+              size={30}
+              className="relative text-white left-3 top-3"
+              onClick={() => setIsMenuOpen(false)}
+            />
+          </div>
           <ul className=" gap-6 hidden md:flex">
             {links.map((linkKey) => (
               <motion.li
